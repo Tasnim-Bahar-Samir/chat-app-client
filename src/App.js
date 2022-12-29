@@ -1,13 +1,16 @@
 
 import './App.css';
-import socketIO from 'socket.io-client';
+import Chat from './Components/Chat/Chat';
 
-const socket = socketIO.connect('http://localhost:5000')
 
 function App() {
+
+  
+
   return (
     <div className="App">
-      <h1>Welcome</h1>
+      <h1 className='fs-2'>Welcome</h1>
+      <Chat/>
     </div>
   );
 }
