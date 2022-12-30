@@ -1,16 +1,26 @@
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Chat from './Components/Chat/Chat';
+import Join from './Components/Join/Join';
 
 
 function App() {
 
-  
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Join/>
+    },
+    {
+      path: '/chat',
+      element: <Chat/>
+    }
+  ])
 
   return (
     <div className="App">
-      <h1 className='fs-2'>Welcome</h1>
-      <Chat/>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }

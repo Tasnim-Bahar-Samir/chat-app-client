@@ -1,14 +1,25 @@
 import { Button } from 'react-bootstrap'
 import React, { useEffect } from 'react'
-
+import { user } from '../Join/Join';
 import socketIO from 'socket.io-client';
 
 
 const Chat = () => {
+    console.log(user)
     const socket = socketIO("http://localhost:5000/",{transports:['websocket']})
     useEffect(()=>{
         socket.on('connect',()=>{
-            alert("Connected")
+            alert('connected')
+        })
+        socket.emit("joined", {user})
+        socket.on('welcomeMsg',({user,message})=>{
+            console.log(user,message)
+        })
+        socket.on('joinMsg',({user,message})=>{
+            console.log(user,message)
+        })
+        socket.on('disconnected',({user,message})=>{
+            console.log(user,message)
         })
     },[socket])
   return (
@@ -20,6 +31,7 @@ const Chat = () => {
 
         </div>
         <div className='w-100  p-3'>
+            {user}
             <div className='d-flex justify-content-between'>
             <input type="rounded" style={{flexBasis:'80%', borderRadius:'10px'}}/>
             <Button className='' variant='secondary' style={{flexBasis:'10%'}}>Send</Button>
