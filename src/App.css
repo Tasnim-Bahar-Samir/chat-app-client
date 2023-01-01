@@ -1,3 +1,17 @@
 body{
   box-sizing: border-box;
 }
+
+.chatBox{
+  height: 400px;
+}
+
+.right{
+  float: right;
+  background-color: green;
+  color: white;
+}
+.left{
+  float: left;
+  background-color: blanchedalmond;
+}
