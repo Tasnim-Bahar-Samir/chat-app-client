@@ -1,10 +1,12 @@
-import { Button } from 'react-bootstrap'
+
 import React, { useEffect, useState } from 'react'
 import { user } from '../Join/Join';
 import socketIO from 'socket.io-client';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import ScrollToBottom from 'react-scroll-to-bottom';
-
+import logo from '../../images/logo.png'
+import {RxCross2} from 'react-icons/rx'
+import { Link } from 'react-router-dom';
 let socket ;
 
 const Chat = () => {
@@ -23,9 +25,8 @@ console.log(messages)
 
 
     useEffect(()=>{
-     socket = socketIO("http://localhost:5000/",{transports:['websocket']})
+     socket = socketIO("https://chat-app-server-production-042a.up.railway.app/",{transports:['websocket']})
         socket.on('connect',()=>{
-            alert('connected')
             setId(socket.id)
         })
         socket.emit("joined", {user})
@@ -52,18 +53,19 @@ console.log(messages)
         })
     },[messages])
   return (
-    <div className='w-75 mx-auto h-100 border'>
-        <div className='bg-success' style={{height:'50px'}}>
-
+    <div className='w-75 mx-auto h-100 border mt-5 shadow'>
+        <div className='border-bottom header d-flex justify-content-between align-items-center px-3' style={{height:'60px'}}>
+            
+                <img src={logo} className='logo' alt="" />
+            <Link to='/'><RxCross2 style={{cursor:'pointer',color:'green'}}/></Link>
         </div>
         <ScrollToBottom className='chatBox'>
             {messages.map((message,idx)=><ChatMessage key={idx} message={message.message} user ={message.id===id?'':message.user} cls={message.id===id?'right':'left'}/>)}
         </ScrollToBottom>
-        <div className='w-100  p-3'>
-            {user}
-            <form onSubmit={handleSend} className='d-flex justify-content-between'>
-            <input name='message' type="rounded" style={{flexBasis:'80%', borderRadius:'10px'}}/>
-            <Button type='submit' className='' variant='secondary' style={{flexBasis:'10%'}}>Send</Button>
+        <div className='w-100 bg-secondary '>
+            <form onSubmit={handleSend} className='d-flex justify-content-between' style={{height:'50px'}}>
+            <input placeholder='Write Message' name='message' className='p-1 px-3 h-100 border-0 border-top' style={{outline:'none',flexBasis:'80%',height:'100%'}}/>
+            <button type='submit' className='border-0 bg-success text-white'  style={{flexBasis:'20%'}}>Send</button>
             </form>
         </div>
     </div>

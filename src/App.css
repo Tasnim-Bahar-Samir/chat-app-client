@@ -1,7 +1,26 @@
 body{
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-
+.App{
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.join-logo{
+  width: 100%;
+}
+.join-logo img{
+  width: 150px;
+  margin: auto;
+  display: block;
+}
+.logo{
+  height: 100%;
+}
+.header{
+  background-color:ghostwhite ;
+}
 .chatBox{
   height: 400px;
 }
@@ -13,5 +32,5 @@ body{
 }
 .left{
   float: left;
-  background-color: blanchedalmond;
+  background-color: ghostwhite;
 }
